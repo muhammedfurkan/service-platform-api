@@ -1,0 +1,3582 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "operationId": "login",
+        "summary": "Kullanıcı girişi",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Başarılı giriş"
+          },
+          "401": {
+            "description": "Geçersiz kimlik bilgileri"
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "operationId": "register",
+        "summary": "Yeni kullanıcı kaydı",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Kullanıcı başarıyla oluşturuldu"
+          },
+          "400": {
+            "description": "Geçersiz veri"
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/auth/profile": {
+      "get": {
+        "operationId": "getProfile",
+        "summary": "Kullanıcı profili görüntüleme",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Kullanıcı profili"
+          },
+          "401": {
+            "description": "Yetkisiz erişim"
+          }
+        },
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/auth/test-admin": {
+      "get": {
+        "operationId": "testAdmin",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new user",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all users",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return all users"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return user details"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update user",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete user",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted successfully"
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/services": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new service",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service created successfully"
+          }
+        },
+        "tags": [
+          "Services"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all services",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return all services"
+          }
+        },
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/services/provider": {
+      "get": {
+        "operationId": "findProviderServices",
+        "summary": "Get provider services",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return provider services"
+          }
+        },
+        "tags": [
+          "Services"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/services/category/{categoryId}": {
+      "get": {
+        "operationId": "findByCategory",
+        "summary": "Get services by category",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return services by category"
+          }
+        },
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/services/nearby": {
+      "get": {
+        "operationId": "findNearby",
+        "summary": "Get nearby services",
+        "parameters": [
+          {
+            "name": "lat",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "lng",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "distance",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return nearby services"
+          }
+        },
+        "tags": [
+          "Services"
+        ]
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get service by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return service details"
+          }
+        },
+        "tags": [
+          "Services"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update service",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateServiceDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service updated successfully"
+          }
+        },
+        "tags": [
+          "Services"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete service",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service deleted successfully"
+          }
+        },
+        "tags": [
+          "Services"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/services/{id}/status": {
+      "put": {
+        "operationId": "updateStatus",
+        "summary": "Update service status",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service status updated successfully"
+          }
+        },
+        "tags": [
+          "Services"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/services/{id}/featured": {
+      "put": {
+        "operationId": "toggleFeatured",
+        "summary": "Toggle service featured status",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service featured status updated"
+          }
+        },
+        "tags": [
+          "Services"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/categories": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new category",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category created successfully"
+          }
+        },
+        "tags": [
+          "Categories"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all categories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return all categories"
+          }
+        },
+        "tags": [
+          "Categories"
+        ]
+      }
+    },
+    "/categories/tree": {
+      "get": {
+        "operationId": "getTree",
+        "summary": "Get category tree",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return category tree"
+          }
+        },
+        "tags": [
+          "Categories"
+        ]
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get category by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return category details"
+          }
+        },
+        "tags": [
+          "Categories"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update category",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Category updated successfully"
+          }
+        },
+        "tags": [
+          "Categories"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete category",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category deleted successfully"
+          }
+        },
+        "tags": [
+          "Categories"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/categories/{id}/featured": {
+      "put": {
+        "operationId": "toggleFeatured",
+        "summary": "Toggle category featured status",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Category featured status updated"
+          }
+        },
+        "tags": [
+          "Categories"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bookings": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new booking",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Booking created successfully"
+          }
+        },
+        "tags": [
+          "Bookings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all bookings",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all bookings"
+          }
+        },
+        "tags": [
+          "Bookings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get booking details",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return booking details"
+          }
+        },
+        "tags": [
+          "Bookings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update booking",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Booking updated successfully"
+          }
+        },
+        "tags": [
+          "Bookings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete booking (Admin only)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booking deleted successfully"
+          }
+        },
+        "tags": [
+          "Bookings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/bookings/{id}/cancel": {
+      "put": {
+        "operationId": "cancel",
+        "summary": "Cancel booking",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelBookingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Booking cancelled successfully"
+          }
+        },
+        "tags": [
+          "Bookings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/payments": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new payment",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Payment created successfully"
+          }
+        },
+        "tags": [
+          "Payments"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all payments",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all payments"
+          }
+        },
+        "tags": [
+          "Payments"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get payment details",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return payment details"
+          }
+        },
+        "tags": [
+          "Payments"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete payment (Admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment deleted successfully"
+          }
+        },
+        "tags": [
+          "Payments"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/payments/{id}/status": {
+      "put": {
+        "operationId": "updateStatus",
+        "summary": "Update payment status (Admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment status updated"
+          }
+        },
+        "tags": [
+          "Payments"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/payments/{id}/refund": {
+      "put": {
+        "operationId": "processRefund",
+        "summary": "Process refund (Admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refund processed successfully"
+          }
+        },
+        "tags": [
+          "Payments"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reviews": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new review",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReviewDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Review created successfully"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all reviews",
+        "parameters": [
+          {
+            "name": "service",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all reviews"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ]
+      }
+    },
+    "/reviews/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get review details",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return review details"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete review (Admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review deleted successfully"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reviews/{id}/provider-response": {
+      "put": {
+        "operationId": "addProviderResponse",
+        "summary": "Add provider response to review",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProviderResponseDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Provider response added successfully"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reviews/{id}/status": {
+      "put": {
+        "operationId": "updateStatus",
+        "summary": "Update review status (Admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReviewStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Review status updated successfully"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reviews/{id}/helpful": {
+      "put": {
+        "operationId": "markHelpful",
+        "summary": "Mark review as helpful",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review marked as helpful"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reviews/{id}/report": {
+      "put": {
+        "operationId": "reportReview",
+        "summary": "Report review",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Review reported successfully"
+          }
+        },
+        "tags": [
+          "Reviews"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/blog": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new blog post",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBlogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Blog post created successfully"
+          }
+        },
+        "tags": [
+          "Blog"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all blog posts",
+        "parameters": [
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all blog posts"
+          }
+        },
+        "tags": [
+          "Blog"
+        ]
+      }
+    },
+    "/blog/search": {
+      "get": {
+        "operationId": "search",
+        "summary": "Search blog posts",
+        "parameters": [
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return matching blog posts"
+          }
+        },
+        "tags": [
+          "Blog"
+        ]
+      }
+    },
+    "/blog/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get blog post by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return blog post details"
+          }
+        },
+        "tags": [
+          "Blog"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update blog post",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBlogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blog post updated successfully"
+          }
+        },
+        "tags": [
+          "Blog"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete blog post",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog post deleted successfully"
+          }
+        },
+        "tags": [
+          "Blog"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/blog/by-slug/{slug}": {
+      "get": {
+        "operationId": "findBySlug",
+        "summary": "Get blog post by slug",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return blog post details"
+          }
+        },
+        "tags": [
+          "Blog"
+        ]
+      }
+    },
+    "/blog/{id}/like": {
+      "put": {
+        "operationId": "like",
+        "summary": "Like blog post",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog post liked successfully"
+          }
+        },
+        "tags": [
+          "Blog"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/pages": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new page",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Page created successfully"
+          }
+        },
+        "tags": [
+          "Pages"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all pages",
+        "parameters": [
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all pages"
+          }
+        },
+        "tags": [
+          "Pages"
+        ]
+      }
+    },
+    "/pages/search": {
+      "get": {
+        "operationId": "search",
+        "summary": "Search pages",
+        "parameters": [
+          {
+            "name": "q",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return matching pages"
+          }
+        },
+        "tags": [
+          "Pages"
+        ]
+      }
+    },
+    "/pages/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get page by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return page details"
+          }
+        },
+        "tags": [
+          "Pages"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update page",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Page updated successfully"
+          }
+        },
+        "tags": [
+          "Pages"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete page",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page deleted successfully"
+          }
+        },
+        "tags": [
+          "Pages"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/pages/by-slug/{slug}": {
+      "get": {
+        "operationId": "findBySlug",
+        "summary": "Get page by slug",
+        "parameters": [
+          {
+            "name": "slug",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return page details"
+          }
+        },
+        "tags": [
+          "Pages"
+        ]
+      }
+    },
+    "/settings": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new setting",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSettingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Setting created successfully"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all settings",
+        "parameters": [
+          {
+            "name": "type",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return all settings"
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/settings/public": {
+      "get": {
+        "operationId": "findPublic",
+        "summary": "Get public settings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return public settings"
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/settings/values": {
+      "get": {
+        "operationId": "getValues",
+        "summary": "Get multiple setting values",
+        "parameters": [
+          {
+            "name": "keys",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return setting values"
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/settings/{key}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get setting by key",
+        "parameters": [
+          {
+            "name": "key",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return setting details"
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update setting",
+        "parameters": [
+          {
+            "name": "key",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSettingDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Setting updated successfully"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete setting",
+        "parameters": [
+          {
+            "name": "key",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Setting deleted successfully"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/settings/bulk": {
+      "put": {
+        "operationId": "bulkUpdate",
+        "summary": "Bulk update settings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Settings updated successfully"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/notifications": {
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get user notifications",
+        "parameters": [
+          {
+            "name": "status",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return user notifications"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "removeAll",
+        "summary": "Delete all notifications of a user (Admin)",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All notifications deleted successfully"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/notifications/unread-count": {
+      "get": {
+        "operationId": "getUnreadCount",
+        "summary": "Get unread notifications count",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return unread notifications count"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/notifications/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get notification details",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return notification details"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete notification (Admin)",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notification deleted successfully"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/notifications/{id}/status": {
+      "put": {
+        "operationId": "updateStatus",
+        "summary": "Update notification status",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNotificationStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notification status updated"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/notifications/mark-all-read": {
+      "put": {
+        "operationId": "markAllAsRead",
+        "summary": "Mark all notifications as read",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All notifications marked as read"
+          }
+        },
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new report",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Report created successfully"
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all reports",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return all reports"
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/generate": {
+      "post": {
+        "operationId": "generate",
+        "summary": "Generate quick report",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Report generated successfully"
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/reports/{id}": {
+      "get": {
+        "operationId": "findOne",
+        "summary": "Get report by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return report details"
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "update",
+        "summary": "Update report",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateReportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Report updated successfully"
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "remove",
+        "summary": "Delete report",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Report deleted successfully"
+          }
+        },
+        "tags": [
+          "Reports"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "HizmetBul API",
+    "description": "HizmetBul Servis Platformu API Dokümantasyonu",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Kimlik doğrulama işlemleri"
+    },
+    {
+      "name": "Services",
+      "description": "Hizmet yönetimi"
+    },
+    {
+      "name": "Categories",
+      "description": "Kategori yönetimi"
+    },
+    {
+      "name": "Bookings",
+      "description": "Rezervasyon yönetimi"
+    },
+    {
+      "name": "Payments",
+      "description": "Ödeme işlemleri"
+    },
+    {
+      "name": "Reviews",
+      "description": "Değerlendirme sistemi"
+    },
+    {
+      "name": "Users",
+      "description": "Kullanıcı yönetimi"
+    },
+    {
+      "name": "Notifications",
+      "description": "Bildirim sistemi"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "RegisterDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "provider",
+              "customer"
+            ],
+            "example": "customer"
+          },
+          "userType": {
+            "type": "string",
+            "enum": [
+              "customer",
+              "provider"
+            ]
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "fullName",
+          "role",
+          "userType"
+        ]
+      },
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password123"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "provider",
+              "customer"
+            ]
+          },
+          "userType": {
+            "type": "string",
+            "enum": [
+              "customer",
+              "provider"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "banned"
+            ]
+          },
+          "phone": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "fullName",
+          "email",
+          "password",
+          "role",
+          "userType"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@example.com"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "provider",
+              "customer"
+            ]
+          },
+          "userType": {
+            "type": "string",
+            "enum": [
+              "customer",
+              "provider"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "banned"
+            ]
+          },
+          "phone": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "address": {
+            "type": "object"
+          }
+        }
+      },
+      "LocationPropertiesDto": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "example": "İstiklal Caddesi No: 50, Beyoğlu"
+          },
+          "city": {
+            "type": "string",
+            "example": "İstanbul"
+          },
+          "state": {
+            "type": "string",
+            "example": "İstanbul"
+          }
+        },
+        "required": [
+          "address",
+          "city",
+          "state"
+        ]
+      },
+      "LocationDto": {
+        "type": "object",
+        "properties": {
+          "lng": {
+            "type": "number",
+            "example": 28.9784
+          },
+          "lat": {
+            "type": "number",
+            "example": 41.0082
+          },
+          "properties": {
+            "$ref": "#/components/schemas/LocationPropertiesDto"
+          }
+        },
+        "required": [
+          "lng",
+          "lat",
+          "properties"
+        ]
+      },
+      "WorkingHoursDto": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "example": "09:00"
+          },
+          "end": {
+            "type": "string",
+            "example": "18:00"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ]
+      },
+      "AvailabilityDto": {
+        "type": "object",
+        "properties": {
+          "workingHours": {
+            "example": {
+              "start": "09:00",
+              "end": "18:00"
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WorkingHoursDto"
+              }
+            ]
+          },
+          "workingDays": {
+            "example": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "exceptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "workingHours",
+          "workingDays"
+        ]
+      },
+      "SettingsDto": {
+        "type": "object",
+        "properties": {
+          "instantBooking": {
+            "type": "boolean",
+            "example": true
+          },
+          "minNotice": {
+            "type": "number",
+            "example": 2
+          },
+          "maxBookingsPerDay": {
+            "type": "number",
+            "example": 5
+          }
+        },
+        "required": [
+          "instantBooking",
+          "minNotice",
+          "maxBookingsPerDay"
+        ]
+      },
+      "CreateServiceDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Profesyonel Ev Temizliği"
+          },
+          "description": {
+            "type": "string",
+            "example": "Detaylı ev temizlik hizmeti..."
+          },
+          "categoryId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "price": {
+            "type": "number",
+            "example": 250
+          },
+          "currency": {
+            "type": "string",
+            "example": "TRY"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationDto"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "pending",
+              "rejected"
+            ]
+          },
+          "availability": {
+            "$ref": "#/components/schemas/AvailabilityDto"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SettingsDto"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "categoryId",
+          "price",
+          "location",
+          "availability",
+          "settings"
+        ]
+      },
+      "UpdateServiceDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Profesyonel Ev Temizliği"
+          },
+          "description": {
+            "type": "string",
+            "example": "Detaylı ev temizlik hizmeti..."
+          },
+          "categoryId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "price": {
+            "type": "number",
+            "example": 250
+          },
+          "currency": {
+            "type": "string",
+            "example": "TRY"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationDto"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "pending",
+              "rejected"
+            ]
+          },
+          "availability": {
+            "$ref": "#/components/schemas/AvailabilityDto"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SettingsDto"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      },
+      "CreateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ev Temizliği"
+          },
+          "slug": {
+            "type": "string",
+            "example": "ev-temizligi"
+          },
+          "description": {
+            "type": "string",
+            "example": "Profesyonel ev temizlik hizmetleri"
+          },
+          "icon": {
+            "type": "string",
+            "example": "fas fa-home"
+          },
+          "image": {
+            "type": "string",
+            "example": "temizlik.jpg"
+          },
+          "parentId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "order": {
+            "type": "number",
+            "example": 1
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          },
+          "isFeatured": {
+            "type": "boolean",
+            "example": false
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "slug"
+        ]
+      },
+      "UpdateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ev Temizliği"
+          },
+          "slug": {
+            "type": "string",
+            "example": "ev-temizligi"
+          },
+          "description": {
+            "type": "string",
+            "example": "Profesyonel ev temizlik hizmetleri"
+          },
+          "icon": {
+            "type": "string",
+            "example": "fas fa-home"
+          },
+          "image": {
+            "type": "string",
+            "example": "temizlik.jpg"
+          },
+          "parentId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "order": {
+            "type": "number",
+            "example": 1
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          },
+          "isFeatured": {
+            "type": "boolean",
+            "example": false
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      },
+      "CreateBookingDto": {
+        "type": "object",
+        "properties": {
+          "serviceId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-03-20"
+          },
+          "time": {
+            "type": "string",
+            "example": "14:30"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationDto"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "serviceId",
+          "date",
+          "time"
+        ]
+      },
+      "UpdateBookingDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-03-20"
+          },
+          "time": {
+            "type": "string",
+            "example": "14:30"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationDto"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "confirmed",
+              "completed",
+              "cancelled"
+            ],
+            "description": "Booking status"
+          },
+          "paymentStatus": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "paid",
+              "refunded",
+              "failed"
+            ],
+            "description": "Payment status"
+          }
+        }
+      },
+      "CancelBookingDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "example": "Schedule conflict",
+            "description": "Reason for cancellation"
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "PaymentDetailsDto": {
+        "type": "object",
+        "properties": {
+          "cardLastFour": {
+            "type": "string"
+          },
+          "cardBrand": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          }
+        }
+      },
+      "CreatePaymentDto": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "amount": {
+            "type": "number",
+            "example": 250
+          },
+          "currency": {
+            "type": "string",
+            "example": "TRY"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "credit_card",
+              "bank_transfer",
+              "wallet"
+            ]
+          },
+          "paymentDetails": {
+            "$ref": "#/components/schemas/PaymentDetailsDto"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "bookingId",
+          "amount",
+          "method"
+        ]
+      },
+      "UpdatePaymentStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "processing",
+              "completed",
+              "failed",
+              "refunded"
+            ]
+          },
+          "transactionId": {
+            "type": "string",
+            "example": "TR123456789"
+          },
+          "error": {
+            "type": "string",
+            "example": "Payment failed: Insufficient funds"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "CreateReviewDto": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "rating": {
+            "type": "number",
+            "example": 5,
+            "description": "Rating between 1-5"
+          },
+          "comment": {
+            "type": "string",
+            "example": "Çok memnun kaldım, kesinlikle tavsiye ederim.",
+            "description": "Review comment"
+          },
+          "images": {
+            "example": [
+              "image1.jpg",
+              "image2.jpg"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "example": [
+              "profesyonel",
+              "dakik",
+              "temiz"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "bookingId",
+          "rating",
+          "comment"
+        ]
+      },
+      "ProviderResponseDto": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "example": "Değerlendirmeniz için teşekkür ederim.",
+            "description": "Provider response to the review"
+          }
+        },
+        "required": [
+          "comment"
+        ]
+      },
+      "UpdateReviewStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ]
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "CreateBlogDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Blog Başlığı"
+          },
+          "slug": {
+            "type": "string",
+            "example": "blog-basligi"
+          },
+          "content": {
+            "type": "string",
+            "example": "Blog içeriği..."
+          },
+          "excerpt": {
+            "type": "string",
+            "example": "Kısa özet..."
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "featuredImage": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ]
+          },
+          "seo": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "title",
+          "slug",
+          "content"
+        ]
+      },
+      "UpdateBlogDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Blog Başlığı"
+          },
+          "slug": {
+            "type": "string",
+            "example": "blog-basligi"
+          },
+          "content": {
+            "type": "string",
+            "example": "Blog içeriği..."
+          },
+          "excerpt": {
+            "type": "string",
+            "example": "Kısa özet..."
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "featuredImage": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ]
+          },
+          "seo": {
+            "type": "object"
+          }
+        }
+      },
+      "LayoutDto": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "type": "boolean"
+          },
+          "footer": {
+            "type": "boolean"
+          },
+          "sidebar": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SeoDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ogImage": {
+            "type": "string"
+          },
+          "noIndex": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreatePageDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Hakkımızda"
+          },
+          "slug": {
+            "type": "string",
+            "example": "hakkimizda"
+          },
+          "content": {
+            "type": "string",
+            "example": "Sayfa içeriği..."
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "static",
+              "dynamic",
+              "landing"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ]
+          },
+          "template": {
+            "type": "string"
+          },
+          "layout": {
+            "$ref": "#/components/schemas/LayoutDto"
+          },
+          "seo": {
+            "$ref": "#/components/schemas/SeoDto"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "title",
+          "slug",
+          "content",
+          "type"
+        ]
+      },
+      "UpdatePageDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Hakkımızda"
+          },
+          "slug": {
+            "type": "string",
+            "example": "hakkimizda"
+          },
+          "content": {
+            "type": "string",
+            "example": "Sayfa içeriği..."
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "static",
+              "dynamic",
+              "landing"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ]
+          },
+          "template": {
+            "type": "string"
+          },
+          "layout": {
+            "$ref": "#/components/schemas/LayoutDto"
+          },
+          "seo": {
+            "$ref": "#/components/schemas/SeoDto"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ValidationDto": {
+        "type": "object",
+        "properties": {
+          "required": {
+            "type": "boolean"
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "pattern": {
+            "type": "string"
+          }
+        }
+      },
+      "MetadataDto": {
+        "type": "object",
+        "properties": {
+          "inputType": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "validation": {
+            "$ref": "#/components/schemas/ValidationDto"
+          },
+          "group": {
+            "type": "string"
+          },
+          "order": {
+            "type": "number"
+          }
+        }
+      },
+      "CreateSettingDto": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "example": "site.title"
+          },
+          "value": {
+            "type": "string",
+            "example": "HizmetBul"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "general",
+              "mail",
+              "payment",
+              "notification",
+              "social",
+              "integration"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean",
+            "default": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataDto"
+          }
+        },
+        "required": [
+          "key",
+          "value",
+          "type"
+        ]
+      },
+      "UpdateSettingDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "example": "HizmetBul"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "general",
+              "mail",
+              "payment",
+              "notification",
+              "social",
+              "integration"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean",
+            "default": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/MetadataDto"
+          }
+        }
+      },
+      "UpdateNotificationStatusDto": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "unread",
+              "read",
+              "archived"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "FiltersDto": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateReportDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Aylık Gelir Raporu"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "booking",
+              "revenue",
+              "user",
+              "service",
+              "performance"
+            ]
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekly",
+              "monthly",
+              "yearly",
+              "custom"
+            ]
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-01"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-31"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/FiltersDto"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "title",
+          "type",
+          "period",
+          "startDate",
+          "endDate"
+        ]
+      },
+      "GenerateReportDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "booking",
+              "revenue",
+              "user",
+              "service",
+              "performance"
+            ]
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekly",
+              "monthly",
+              "yearly",
+              "custom"
+            ]
+          },
+          "format": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "period"
+        ]
+      },
+      "UpdateReportDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Aylık Gelir Raporu"
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "weekly",
+              "monthly",
+              "yearly",
+              "custom"
+            ]
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-01"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2024-01-31"
+          },
+          "filters": {
+            "$ref": "#/components/schemas/FiltersDto"
+          },
+          "fileType": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}
