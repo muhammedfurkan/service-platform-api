@@ -6,16 +6,6 @@
         "operationId": "login",
         "summary": "Kullanıcı girişi",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Başarılı giriş"
@@ -34,16 +24,6 @@
         "operationId": "register",
         "summary": "Yeni kullanıcı kaydı",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "Kullanıcı başarıyla oluşturuldu"
@@ -99,16 +79,6 @@
         "operationId": "create",
         "summary": "Create new user",
         "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "User created successfully"
@@ -183,16 +153,6 @@
             }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "User updated successfully"
@@ -680,6 +640,224 @@
           {
             "bearer": []
           }
+        ]
+      }
+    },
+    "/bids": {
+      "post": {
+        "operationId": "create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "operationId": "findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/bids/{id}": {
+      "get": {
+        "operationId": "findById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/requests": {
+      "post": {
+        "operationId": "create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      },
+      "get": {
+        "operationId": "findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/requests/{id}": {
+      "get": {
+        "operationId": "findById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/uploads": {
+      "post": {
+        "operationId": "create",
+        "summary": "Create new upload",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "The upload has been successfully created."
+          },
+          "400": {
+            "description": "Bad Request."
+          }
+        },
+        "tags": [
+          "uploads"
+        ]
+      },
+      "get": {
+        "operationId": "findAll",
+        "summary": "Get all uploads",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return all uploads.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Upload"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "uploads"
+        ]
+      }
+    },
+    "/uploads/{id}": {
+      "get": {
+        "operationId": "findById",
+        "summary": "Get upload by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Upload ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the upload.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Upload"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Upload not found."
+          }
+        },
+        "tags": [
+          "uploads"
+        ]
+      },
+      "delete": {
+        "operationId": "delete",
+        "summary": "Delete upload by id",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Upload ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Upload successfully deleted."
+          },
+          "404": {
+            "description": "Upload not found."
+          }
+        },
+        "tags": [
+          "uploads"
         ]
       }
     },
@@ -2317,164 +2495,6 @@
       }
     },
     "schemas": {
-      "LoginDto": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "example": "user@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "password123"
-          }
-        },
-        "required": [
-          "email",
-          "password"
-        ]
-      },
-      "RegisterDto": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "example": "user@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "password123"
-          },
-          "fullName": {
-            "type": "string",
-            "example": "John Doe"
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "provider",
-              "customer"
-            ],
-            "example": "customer"
-          },
-          "userType": {
-            "type": "string",
-            "enum": [
-              "customer",
-              "provider"
-            ]
-          }
-        },
-        "required": [
-          "email",
-          "password",
-          "fullName",
-          "role",
-          "userType"
-        ]
-      },
-      "CreateUserDto": {
-        "type": "object",
-        "properties": {
-          "fullName": {
-            "type": "string",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "example": "john@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "password123"
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "provider",
-              "customer"
-            ]
-          },
-          "userType": {
-            "type": "string",
-            "enum": [
-              "customer",
-              "provider"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "banned"
-            ]
-          },
-          "phone": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "address": {
-            "type": "object"
-          }
-        },
-        "required": [
-          "fullName",
-          "email",
-          "password",
-          "role",
-          "userType"
-        ]
-      },
-      "UpdateUserDto": {
-        "type": "object",
-        "properties": {
-          "fullName": {
-            "type": "string",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "example": "john@example.com"
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "admin",
-              "provider",
-              "customer"
-            ]
-          },
-          "userType": {
-            "type": "string",
-            "enum": [
-              "customer",
-              "provider"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "active",
-              "inactive",
-              "banned"
-            ]
-          },
-          "phone": {
-            "type": "string"
-          },
-          "avatar": {
-            "type": "string"
-          },
-          "address": {
-            "type": "object"
-          }
-        }
-      },
       "LocationPropertiesDto": {
         "type": "object",
         "properties": {
@@ -2809,6 +2829,10 @@
             "type": "object"
           }
         }
+      },
+      "Upload": {
+        "type": "object",
+        "properties": {}
       },
       "CreateBookingDto": {
         "type": "object",

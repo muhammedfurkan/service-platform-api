@@ -4,6 +4,7 @@ import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './dto/register.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UserRole, UserStatus } from '../users/schemas/user.schema';
 
 @Injectable()
 export class AuthService {
@@ -27,28 +28,23 @@ export class AuthService {
       sub: user._id,
       role: user.role
     };
+    // eğer kullanıcı mail doğrulaması yapmadıysa, token oluşturma
+    if (!user.isVerified) {
+      throw new UnauthorizedException('Email doğrulaması yapılmadı');
+    }
     return {
       token: this.jwtService.sign(payload),
       user,
     };
   }
 
-  async register(registerDto: RegisterDto) {
-    const existingUser = await this.usersService.findByEmail(registerDto.email);
+  async register(body: any) {
+    const existingUser = await this.usersService.findByEmail(body.email);
     if (existingUser) {
       throw new BadRequestException('Email already exists');
     }
 
-    // RegisterDto'yu CreateUserDto'ya dönüştür
-    const createUserDto: CreateUserDto = {
-      email: registerDto.email,
-      password: registerDto.password,
-      fullName: registerDto.fullName,
-      role: registerDto.role,
-      userType: registerDto.userType,
-    };
-
-    const user = await this.usersService.create(createUserDto);
+    const user = await this.usersService.create(body);
     const { password, ...result } = user.toObject();
     return result;
   }

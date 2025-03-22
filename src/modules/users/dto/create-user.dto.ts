@@ -1,53 +1,62 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEmail, IsEnum, IsString, IsOptional, MinLength, IsObject } from 'class-validator';
-import { UserRole, UserStatus } from '../schemas/user.schema';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsEnum, IsString, IsArray, MinLength } from 'class-validator';
+import { UserRole } from '../schemas/user.schema';
 
 export class CreateUserDto {
-  @ApiProperty({ example: 'John Doe' })
-  @IsString()
-  @MinLength(2)
-  fullName: string;
-
-  @ApiProperty({ example: 'john@example.com' })
+  @ApiProperty({ example: 'user@example.com' })
   @IsEmail()
   email: string;
 
-  @ApiProperty({ example: 'password123' })
+  @ApiProperty({ example: '123456' })
   @IsString()
   @MinLength(6)
   password: string;
 
-  @ApiProperty({ enum: UserRole })
+  @ApiProperty({ example: '123456' })
+  @IsString()
+  @MinLength(6)
+  confirmPassword: string;
+
+  @ApiProperty({ example: '5551234567' })
+  @IsString()
+  phone: string;
+
+  @ApiProperty({ enum: UserRole, example: UserRole.CUSTOMER })
   @IsEnum(UserRole)
-  role: UserRole;
+  userType: UserRole;
 
-  @ApiProperty({ enum: ['customer', 'provider'] })
-  @IsEnum(['customer', 'provider'])
-  userType: 'customer' | 'provider';
-
-  @ApiPropertyOptional({ enum: UserStatus })
-  @IsEnum(UserStatus)
-  @IsOptional()
-  status?: UserStatus;
-
-  @ApiPropertyOptional()
+  @ApiProperty({ example: 'John' })
   @IsString()
-  @IsOptional()
-  phone?: string;
+  firstName: string;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ example: 'Doe' })
   @IsString()
-  @IsOptional()
-  avatar?: string;
+  lastName: string;
 
-  @ApiPropertyOptional()
-  @IsObject()
-  @IsOptional()
-  address?: {
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    zipCode: string;
-  };
-} 
+  @ApiProperty({ example: '1990-01-01' })
+  @IsString()
+  birthDate: string;
+
+  @ApiProperty({ 
+    enum: ['Location1', 'Location2', 'Location3'],
+    example: ['Location1'],
+    isArray: true 
+  })
+  @IsArray()
+  @IsEnum(['Location1', 'Location2', 'Location3'], { each: true })
+  selectedLocations: string[];
+
+  @ApiProperty({ example: ['Category1'], isArray: true })
+  @IsArray()
+  @IsString({ each: true })
+  selectedCategories: string[];
+
+  @ApiProperty({ 
+    enum: ['Document1', 'Document2', 'Document3'],
+    example: ['Document1'],
+    isArray: true 
+  })
+  @IsArray()
+  @IsEnum(['Document1', 'Document2', 'Document3'], { each: true })
+  selectedDocuments: string[];
+}

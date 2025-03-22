@@ -22,6 +22,7 @@ async function bootstrap() {
     app.useGlobalFilters(exceptionFilter);
 
     // Global validation pipe
+    app.useGlobalPipes(new ValidationPipe());
     app.useGlobalPipes(new ValidationPipe({
       transform: true,
       whitelist: true,
@@ -31,7 +32,14 @@ async function bootstrap() {
       },
     }));
 
-    app.enableCors();
+    app.enableCors({
+      origin: ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'],
+      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Accept', 'Authorization'],
+      credentials: true,
+      preflightContinue: false,
+      optionsSuccessStatus: 204
+    });
 
     const config = new DocumentBuilder()
       .setTitle('HizmetBul API')

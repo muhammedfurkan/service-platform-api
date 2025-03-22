@@ -23,10 +23,10 @@ export class AuthController {
   @ApiOperation({ summary: 'Kullanıcı girişi' })
   @ApiResponse({ status: 200, description: 'Başarılı giriş' })
   @ApiResponse({ status: 401, description: 'Geçersiz kimlik bilgileri' })
-  async login(@Body() loginDto: LoginDto) {
+  async login(@Body() body: any) {
     const user = await this.authService.validateUser(
-      loginDto.email,
-      loginDto.password,
+      body.email,
+      body.password,
     );
     if (!user) {
       throw new UnauthorizedException('Geçersiz email veya şifre');
@@ -38,15 +38,19 @@ export class AuthController {
   @ApiOperation({ summary: 'Yeni kullanıcı kaydı' })
   @ApiResponse({ status: 201, description: 'Kullanıcı başarıyla oluşturuldu' })
   @ApiResponse({ status: 400, description: 'Geçersiz veri' })
-  async register(@Body() registerDto: RegisterDto) {
-    const existingUser = await this.usersService.findByEmail(registerDto.email);
+  async register(@Body() body: any) {
+    console.log(body,"*-*-*-*-");
+    const existingUser = await this.usersService.findByEmail(body.email);
     if (existingUser) {
       throw new UnauthorizedException('Bu email adresi zaten kullanımda');
     }
 
-    const user = await this.usersService.create(registerDto) as UserDocument;
+    const user = await this.usersService.create(body) as UserDocument;
     const { password, ...result } = user.toObject();
-    return this.authService.login(result);
+    // return this.authService.login(result);
+
+    // bu kısımda kayıt başarılı oluşturulacak, ama email doğrulaması sonrası giriş yapılacak
+    return true;
   }
 
   @Get('profile')

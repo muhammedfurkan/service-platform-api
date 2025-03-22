@@ -13,6 +13,9 @@ import { BlogModule } from './modules/blog/blog.module';
 import { PagesModule } from './modules/pages/pages.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { ReportsModule } from './modules/reports/reports.module';
+import { BidsModule } from './modules/bids/bids.module';
+import { RequestsModule } from './modules/requests/requests.module';
+import { UploadsModule } from './modules/uploads/uploads.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -31,10 +34,13 @@ import configuration from './config/configuration';
     // Temel Modüller
     AuthModule,
     UsersModule,
-    
+
     // Hizmet Modülleri
     ServicesModule,
     CategoriesModule,
+    BidsModule,
+    RequestsModule,
+    UploadsModule,
     
     // İşlem Modülleri
     BookingsModule,

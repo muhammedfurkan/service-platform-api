@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+// import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -12,15 +12,15 @@ export class UsersService {
     @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<UserDocument> {
-    const existingUser = await this.userModel.findOne({ email: createUserDto.email });
+  async create(body: any): Promise<UserDocument> {
+    const existingUser = await this.userModel.findOne({ email: body.email });
     if (existingUser) {
       throw new BadRequestException('Email already exists');
     }
 
-    const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
+    const hashedPassword = await bcrypt.hash(body.password, 10);
     const user = new this.userModel({
-      ...createUserDto,
+      ...body,
       password: hashedPassword,
     });
 
@@ -47,9 +47,9 @@ export class UsersService {
     return user;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<UserDocument> {
+  async update(id: string, body: any): Promise<UserDocument> {
     const user = await this.userModel
-      .findByIdAndUpdate(id, updateUserDto, { new: true })
+      .findByIdAndUpdate(id, body, { new: true })
       .select('-password')
       .exec();
 
